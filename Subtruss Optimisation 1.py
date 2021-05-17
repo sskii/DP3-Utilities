@@ -55,13 +55,19 @@ for n in nTriangles:
 			stMaxCompLoad = (2 * k * phi * (math.cos(theta) ** 3) * (n ** 2)) / (stLength ** 2)
 			stMaxTensLoad = (230 * phi) / (math.tan(theta))
 
+			# calc member lengths
+			diagLength = (stLength) / (n * math.cos(theta))
+			vertLength = (2 * stLength * math.tan(theta)) / (n)
+
 			# write the solutions out
 			outputBuffer += str(n)
 			outputBuffer += "           "
 			outputBuffer += str(round(math.degrees(theta), DP))
-			outputBuffer += "                     "
-			outputBuffer += (str(stMaxCompLoad) + ", " + str(stMaxTensLoad))
-			outputBuffer += "\n"
+			outputBuffer += "                     ("
+			outputBuffer += (str(round(stMaxCompLoad, 2)) + ", " + str(round(stMaxTensLoad, 2)))
+			outputBuffer += ")          ("
+			outputBuffer += (str(round(diagLength, 2)) + ", " + str(round(vertLength, 2)))
+			outputBuffer += ")\n"
 
 			run = False
 		else:
@@ -73,7 +79,7 @@ for n in nTriangles:
 #done
 print("\n* * *\nExecution finished!")
 
-print("Solutions for", stLength, "mm subtruss:\n\nTriangles:  Half of enclosed angle:  Calculated capacity (by diagonals, verticals)^")
+print("Solutions for", stLength, "mm subtruss:\n\nTriangles:  Half of enclosed angle:  Capacity (diags, verts)^  Length (diags, verts)")
 print(outputBuffer)
 
 print("^ Calculated capacity is valid for subtruss loading under compression assuming all constituent members are type-1. Values given in newtons.")
