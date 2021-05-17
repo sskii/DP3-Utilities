@@ -22,12 +22,14 @@ print("Stepping", thetaStep, "radians per iteration.")
 # We will first evaluate the RHS of the expression. Then we'll evaluate values of theta from zero
 # until the LHS is greater than the RHS, at which point we return theta.
 
+print("\n* * *\n")
+
 for n in nTriangles:
 	
 	print("Beginning evaluation of", n, "triangles.")
 
 	RHS = (115 * (stLength ** 2)) / (k * (n ** 2))
-	print("RHS =", RHS)
+	#print("RHS =", RHS)
 
 	theta = 0			# test theta
 	run = True			# flag
@@ -36,7 +38,7 @@ for n in nTriangles:
 
 		if theta > math.radians(90):
 			# inputs are invalid somehow
-			print("No solutions found! Check inputs.")
+			print("No solutions found; add more triangles.")
 
 			# report this
 			outputBuffer += str(n)
@@ -45,11 +47,11 @@ for n in nTriangles:
 			run = False
 
 		LHS = (math.sin(theta)) * ((math.cos(theta)) ** 2)
-		print("LHS =", LHS, " when θ =", math.degrees(theta))
+		#print("LHS =", LHS, " when θ =", math.degrees(theta))
 
 		if LHS > RHS:
 			#solution found
-			print("\nSolution found. θ =", round(math.degrees(theta), DP))
+			print("Solution found. θ =", round(math.degrees(theta), DP))
 
 			# calc expected subtruss capacity
 			stMaxCompLoad = (2 * k * phi * (math.cos(theta) ** 3) * (n ** 2)) / (stLength ** 2)
@@ -58,6 +60,10 @@ for n in nTriangles:
 			# calc member lengths
 			diagLength = (stLength) / (n * math.cos(theta))
 			vertLength = (2 * stLength * math.tan(theta)) / (n)
+
+			# print to console
+			print("Diagonal members measure", diagLength, "mm and allow truss to support", stMaxCompLoad, "N.")
+			print("Vertical members measure", vertLength, "mm and allow truss to support", stMaxTensLoad, "N.")
 
 			# write the solutions out
 			outputBuffer += str(n)
@@ -74,12 +80,12 @@ for n in nTriangles:
 			#no solution found
 			theta += thetaStep	# increment theta
 	
-	print("Finished evaluating for", n, "triangles.")
+	print("Finished evaluating for", n, "triangles.\n")
 
 #done
-print("\n* * *\nExecution finished!")
+print("* * *\n\nExecution finished!")
 
 print("Solutions for", stLength, "mm subtruss:\n\nTriangles:  Half of enclosed angle:  Capacity (diags, verts)^  Length (diags, verts)")
 print(outputBuffer)
 
-print("^ Calculated capacity is valid for subtruss loading under compression assuming all constituent members are type-1. Values given in newtons.")
+print("^ Calculated capacity is valid for subtruss loading under compression assuming all constituent members are type-1. Values given in newtons. Take the lower of the two.")
