@@ -11,7 +11,7 @@ outputBuffer = ""														# output buffer so that all the useful stuff gets
 # (sinθ)(cosθ)^2 = (115 stLength^2) / (k nTriangles^2)
 
 k = (200) * ((60) ** 2)					# compression constant
-phi = 0.8								# safety factor
+phi = 0.8								# reduction factor
 
 DP = int(input("Please input desired answer precision in DP:\f"))		# decimal answer precision in DP
 thetaStep = math.radians(10 ** (-1 * DP))								# because python works in radians!
