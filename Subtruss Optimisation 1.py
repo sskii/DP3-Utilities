@@ -73,7 +73,7 @@ for n in nTriangles:
 #done
 print("\n* * *\nExecution finished!")
 
-print("Solutions for", stLength, "mm subtruss:\n\nTriangles:  Half of enclosed angle:  Calculated capacity (by diagonals, verticals)")
+print("Solutions for", stLength, "mm subtruss:\n\nTriangles:  Half of enclosed angle:  Calculated capacity (by diagonals, verticals)^")
 print(outputBuffer)
 
-print("\nCalculated capacity is valid for subtruss loading under compression assuming all constituent members are type-1. Values given in newtons.")
+print("^ Calculated capacity is valid for subtruss loading under compression assuming all constituent members are type-1. Values given in newtons.")
