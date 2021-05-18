@@ -1,14 +1,15 @@
 import math
 
-# parameters
-k = (200) * ((60) ** 2)					# compression constant
+# environment parameters
+kComp = (200) * ((60) ** 2)				# compression constant
+kTens = 230								# tension constant
 phi = 0.8								# reduction factor
 
 # evaluate a given subtruss
 def evaluateSubtruss(length, triangles, precision):
 
 	thetaStep = math.radians(10 ** (-1 * precision))				# because python works in radians
-	RHS = (115 * (length ** 2)) / (k * (triangles ** 2))
+	RHS = (kTens * (length ** 2)) / (2 * kComp * (triangles ** 2))
 
 	# run results
 	success = False
@@ -33,8 +34,8 @@ def evaluateSubtruss(length, triangles, precision):
 			#solution found
 
 			# calc expected subtruss capacity
-			stMaxCompLoad = (2 * k * phi * (math.cos(theta) ** 3) * (triangles ** 2)) / (length ** 2)
-			stMaxTensLoad = (230 * phi) / (math.tan(theta))
+			stMaxCompLoad = (2 * kComp * phi * (math.cos(theta) ** 3) * (triangles ** 2)) / (length ** 2)
+			stMaxTensLoad = (kTens * phi) / (math.tan(theta))
 
 			# calc member lengths
 			diagLength = (length) / (triangles * math.cos(theta))
