@@ -42,7 +42,7 @@ for n in nTriangles:
 
 			# report this
 			outputBuffer += str(n)
-			outputBuffer += "           (No valid solutions.)\n"
+			outputBuffer += "           (No valid solutions)\n"
 
 			run = False
 
