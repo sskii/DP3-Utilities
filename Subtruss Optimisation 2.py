@@ -62,7 +62,23 @@ def evaluateSubtruss(length, triangles, precision):
 
 
 # test code
-testTrusses = [2, 4, 6, 8]
+triangles = [2, 4, 6, 8]	# possible numbers of triangles
+							# trusses to test
+subtrusses = [191.169, 111.111]
 
-for i in testTrusses:
-	print(evaluateSubtruss(191.169, i, 2))
+
+for i in subtrusses:
+	print("\nSolutions for", i, "mm subtruss:\nTriangles:  Half of enclosed angle:  Capacity (diags, verts)^  Length (diags, verts)")
+	for n in triangles:
+		data = evaluateSubtruss(i, n, 2)
+		
+		if data[0]:
+			print(
+				n, "         ", data[1],
+				"                    (", data[2], ",", data[3],
+				")      (", data[4], ",", data[5], ")"
+			)
+		
+		else:
+			# unsuccessful run
+			print(n, "          No solutions found.")
