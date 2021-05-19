@@ -66,20 +66,35 @@ def evaluateSubtruss(length, triangles, precision):
 # test code #
 triangles = [2, 4, 6, 8]	# possible numbers of triangles
 							# trusses to test
-subtrusses = [220, 267]
 
-for i in subtrusses:
-	print("\nSolutions for", i, "mm subtruss:\nTriangles:  Half of enclosed angle:  Capacity (diags, verts)^  Length (diags, verts)")
-	for n in triangles:
-		data = evaluateSubtruss(i, n, 3)
-		
-		if data[0]:
-			print(
-				n, "         ", data[1],
-				"                    (", data[2], ",", data[3],
-				")      (", data[4], ",", data[5], ")"
-			)
-		
-		else:
-			# unsuccessful run
-			print(n, "          No solutions found.")
+l = 0
+
+p1 = [float(input("Enter start x coordinate: ")), float(input("Enter start y coordinate: "))]
+p2 = [float(input("\nEnter end x coordinate:   ")), float(input("Enter end y coordinate:   "))]
+
+dx = p2[0] - p1[0]
+dy = p2[1] - p1[1]
+
+l = math.sqrt( dx**2 + dy**2 )
+
+print("\nSolutions for", l, "mm subtruss:\nTriangles:  Half of enclosed angle:  Capacity (diags, verts)^  Length (diags, verts)")
+for n in triangles:
+	data = evaluateSubtruss(l, n, 3)
+	
+	if data[0]:
+		print(
+			n, "         ", data[1],
+			"                    (", data[2], ",", data[3],
+			")      (", data[4], ",", data[5], ")"
+		)
+	
+	else:
+		# unsuccessful run
+		print(n, "          No solutions found.")
+
+print("\n* Additional Stats *")
+print("Length in x:  ", dx)
+print("Length in y:  ", dy)
+print("Incline angle:", math.degrees(math.atan(dy/dx)), "degrees")
+
+print("\nEnd.")
