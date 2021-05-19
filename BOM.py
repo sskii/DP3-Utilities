@@ -3,7 +3,7 @@ totalJoints = int(input("Enter number of joints in supertruss:  "))
 totalMembers = 0
 
 # supertruss config
-numSubtrusses = int(input("Enter number of subtrusses present:  "))
+numSubtrusses = int(input("Enter number of subtrusses present:    "))
 
 for i in range(1, numSubtrusses + 1):
 	# specific subtruss config
