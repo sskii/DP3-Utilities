@@ -4,6 +4,10 @@
 
 # also includes functionality to scale the output dimensions
 
+############################
+#  VERY BUGGY, DO NOT USE  #
+############################
+
 import math
 
 # environment parameters #
