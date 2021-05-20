@@ -76,6 +76,7 @@ l = 0
 p1 = [float(input(    "Enter start x coordinate:  ")), float(input("Enter start y coordinate: "))]
 p2 = [float(input(  "\nEnter end x coordinate:    ")), float(input("Enter end y coordinate:   "))]
 triangles = int(input("Input number of triangles: "))
+reduction = int(input("Input scale-down factor:   "))
 
 dx = p2[0] - p1[0]
 dy = p2[1] - p1[1]
@@ -98,7 +99,7 @@ for i in range(0, triangles + 1):
 	# check whether there are additional points
 	#if i % 2 == 1:
 
-	print("Coordinates: (", cp[0], ",", cp[1], ")")
+	print("Coordinates: (", cp[0] / reduction, ",", cp[1] / reduction, ")")
 	
 	
 

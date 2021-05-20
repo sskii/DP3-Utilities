@@ -96,16 +96,14 @@ if dx != 0:
 	# avoid errors for vertical trusses as we cannot divide by zero.
 	angle = math.degrees(math.atan(dy/dx))
 else:
-	angle = 90
-
-#if dy < 0:
-	angle += 180
-
-#if dx 
+	if dy >= 0:
+		angle = 90
+	else:
+		angle = 270 
 
 print("\n* Additional Stats *")
 print("Length in x:  ", dx)
 print("Length in y:  ", dy)
-print("Incline angle:", angle, "degrees. (Note that this is not absolute.)")
+print("Incline angle:", angle, "degrees. (Note that this is not absolute!)")
 
 print("\nEnd.")
