@@ -74,8 +74,6 @@ print("All lengths mm.")
 p1 = [float(input(    "Enter start x coordinate:  ")), float(input("Enter start y coordinate:  "))]
 p2 = [float(input(  "\nEnter end x coordinate:    ")), float(input("Enter end y coordinate:    "))]
 triangles = int(input("Input number of triangles: "))
-print("NB: Scaling is about the origin (0,0) and NOT the truss start.")
-reduction = int(input("Input scale-down factor:   "))
 sigfigs =   int(input("Specify sig. fig.s:        "))
 
 dx = p2[0] - p1[0]
@@ -86,7 +84,9 @@ data = evaluateSubtruss(l, triangles, sigfigs)
 
 if data[0]:
 	# only if truss is valid.
-	print("\nDesign is valid. Evaluation:\n")
+
+	print("\nNB: Scaling is about the origin (0,0) and NOT the truss start point!")
+	reduction = int(input("Input scale-down factor:   "))
 
 	# calculate x and y steps per joint
 	joint_dx = dx / triangles
@@ -100,13 +100,15 @@ if data[0]:
 
 	a = math.radians(angle)
 
+	print("* Joint Coordinates *")
+
 	# find the joints along the centreline
 	for i in range(0, triangles + 1):
 
 		# get the coordinates of the relevant centre point
 		cp = [(joint_dx * i), (joint_dy * i)]
 
-		print("Centre point: (", round(cp[0] / reduction, 1), ",", round(cp[1] / reduction, 1), ")")
+		print("Centre point - (", round(cp[0] / reduction, 1), ",", round(cp[1] / reduction, 1), ")")
 
 		# check whether there are additional joints
 		if i % 2 == 1:
@@ -120,8 +122,8 @@ if data[0]:
 			lp = [(l * math.sin(a)), (-1 * l * math.cos(a))]
 
 			# print the coordinates
-			print("Upper point:  (", round(up[0] / reduction, 1), ",", round(up[1] / reduction, 1), ")")
-			print("Lower point:  (", round(lp[0] / reduction, 1), ",", round(lp[1] / reduction, 1), ")")
+			print("Upper point  ^ (", round(up[0] / reduction, 1), ",", round(up[1] / reduction, 1), ")")
+			print("Lower point  v (", round(lp[0] / reduction, 1), ",", round(lp[1] / reduction, 1), ")")
 		
 
 
