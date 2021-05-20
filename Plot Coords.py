@@ -59,29 +59,34 @@ def evaluateSubtruss(length, triangles, precision):
 	
 	return [
 		success,
-		round(math.degrees(theta), precision),
-		round(stMaxCompLoad, 2),
-		round(stMaxTensLoad, 2),
-		round(diagLength, 2),
-		round(vertLength, 2)
+		math.degrees(theta),
+		stMaxCompLoad,
+		stMaxTensLoad,
+		diagLength, 2,
+		vertLength, 2
 	]
 
 
 l = 0
 
-p1 = [float(input(    "Enter start x coordinate:  ")), float(input("Enter start y coordinate: "))]
-p2 = [float(input(  "\nEnter end x coordinate:    ")), float(input("Enter end y coordinate:   "))]
+print("All lengths mm.")
+
+p1 = [float(input(    "Enter start x coordinate:  ")), float(input("Enter start y coordinate:  "))]
+p2 = [float(input(  "\nEnter end x coordinate:    ")), float(input("Enter end y coordinate:    "))]
 triangles = int(input("Input number of triangles: "))
+print("NB: Scaling is about the origin (0,0) and NOT the truss start.")
 reduction = int(input("Input scale-down factor:   "))
+sigfigs =   int(input("Input nº of sig. fig.s:    "))
 
 dx = p2[0] - p1[0]
 dy = p2[1] - p1[1]
 
 l = math.sqrt( dx**2 + dy**2 )
-data = evaluateSubtruss(l, triangles, 3)
+data = evaluateSubtruss(l, triangles, sigfigs)
 
 if data[0]:
 	# only if truss is valid.
+	print("\nDesign is valid. Evaluation:\n")
 
 	# calculate x and y steps per joint
 	joint_dx = dx / triangles
@@ -101,7 +106,7 @@ if data[0]:
 		# get the coordinates of the relevant centre point
 		cp = [(joint_dx * i), (joint_dy * i)]
 
-		print("Centre point: (", cp[0] / reduction, ",", cp[1] / reduction, ")")
+		print("Centre point: (", math.round(cp[0] / reduction, 1), ",", math.round(cp[1] / reduction, 1), ")")
 
 		# check whether there are additional joints
 		if i % 2 == 1:
@@ -115,21 +120,22 @@ if data[0]:
 			lp = [(l * math.sin(a)), (-1 * l * math.cos(a))]
 
 			# print the coordinates
-			print("Upper point:  (", up[0] / reduction, ",", up[1] / reduction, ")")
-			print("Lower point:  (", lp[0] / reduction, ",", lp[1] / reduction, ")")
+			print("Upper point:  (", math.round(up[0] / reduction, 1), ",", math.round(up[1] / reduction, 1), ")")
+			print("Lower point:  (", math.round(lp[0] / reduction, 1), ",", math.round(lp[1] / reduction, 1), ")")
 		
 
 
 	print("\n* Geometry Stats *")
-	print("Change in x:  ", dx, "mm")
-	print("Change in y:  ", dy, "mm")
-	print("Incline angle:", angle, "degrees. (Note that this is not absolute.)")
-	print("Length of compression members:", data[3], "mm")
-	print("Length of tension members:    ", data[4], "mm")
+	print("Overall span: ", math.round(l, sigfigs), "mm.")
+	print("Change in x:  ", math.roung(dx, sigfigs), "mm")
+	print("Change in y:  ", math.round(dy, sigfigs), "mm")
+	print("Incline angle:", math.round(angle, sigfigs), "degrees. (Note that this is not absolute.)")
+	print("Length of compression members:", math.round(data[3], sigfigs), "mm")
+	print("Length of tension members:    ", math.round(data[4], sigfigs), "mm")
 
 	print("\n* Capacity Stats *")
-	print("Maximum capacity by compression members:", data[1], "N")
-	print("Maximum capacity by tension members:    ", data[2], "N")
+	print("Maximum capacity by compression members:", math.round(data[1], sigfigs), "N")
+	print("Maximum capacity by tension members:    ", math.round(data[2], sigfigs), "N")
 
 
 	print("\nDone.")
@@ -137,6 +143,4 @@ if data[0]:
 else:
 	# invalid truss calculation.
 	print("ERROR: This subtruss is invalid. You've screwed something up. Terribly sorry.")
-
-print("\nSubtruss measures ", l, "mm.")
 
