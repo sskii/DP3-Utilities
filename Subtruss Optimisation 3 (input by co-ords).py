@@ -92,9 +92,20 @@ for n in triangles:
 		# unsuccessful run
 		print(n, "          No solutions found.")
 
+if dx != 0:
+	# avoid errors for vertical trusses as we cannot divide by zero.
+	angle = math.degrees(math.atan(dy/dx))
+else:
+	angle = 90
+
+#if dy < 0:
+	angle += 180
+
+#if dx 
+
 print("\n* Additional Stats *")
 print("Length in x:  ", dx)
 print("Length in y:  ", dy)
-print("Incline angle:", math.degrees(math.atan(dy/dx)), "degrees")
+print("Incline angle:", angle, "degrees. (Note that this is not absolute.)")
 
 print("\nEnd.")
