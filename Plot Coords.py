@@ -95,7 +95,7 @@ if data[0]:
 	# calculate the incline
 	angle = 90
 	if dx != 0:
-		# cannot divide by zero, but otherwise…
+		# cannot divide by zero, but otherwise...
 		angle = math.degrees(math.atan(dy/dx))
 
 	a = math.radians(angle)
