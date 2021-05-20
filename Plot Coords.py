@@ -76,7 +76,7 @@ p2 = [float(input(  "\nEnter end x coordinate:    ")), float(input("Enter end y 
 triangles = int(input("Input number of triangles: "))
 print("NB: Scaling is about the origin (0,0) and NOT the truss start.")
 reduction = int(input("Input scale-down factor:   "))
-sigfigs =   int(input("Input nº of sig. fig.s:    "))
+sigfigs =   int(input("Specify sig. fig.s:        "))
 
 dx = p2[0] - p1[0]
 dy = p2[1] - p1[1]
