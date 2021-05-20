@@ -62,8 +62,8 @@ def evaluateSubtruss(length, triangles, precision):
 		math.degrees(theta),
 		stMaxCompLoad,
 		stMaxTensLoad,
-		diagLength, 2,
-		vertLength, 2
+		diagLength,
+		vertLength
 	]
 
 
@@ -106,7 +106,7 @@ if data[0]:
 		# get the coordinates of the relevant centre point
 		cp = [(joint_dx * i), (joint_dy * i)]
 
-		print("Centre point: (", math.round(cp[0] / reduction, 1), ",", math.round(cp[1] / reduction, 1), ")")
+		print("Centre point: (", round(cp[0] / reduction, 1), ",", round(cp[1] / reduction, 1), ")")
 
 		# check whether there are additional joints
 		if i % 2 == 1:
@@ -120,22 +120,23 @@ if data[0]:
 			lp = [(l * math.sin(a)), (-1 * l * math.cos(a))]
 
 			# print the coordinates
-			print("Upper point:  (", math.round(up[0] / reduction, 1), ",", math.round(up[1] / reduction, 1), ")")
-			print("Lower point:  (", math.round(lp[0] / reduction, 1), ",", math.round(lp[1] / reduction, 1), ")")
+			print("Upper point:  (", round(up[0] / reduction, 1), ",", round(up[1] / reduction, 1), ")")
+			print("Lower point:  (", round(lp[0] / reduction, 1), ",", round(lp[1] / reduction, 1), ")")
 		
 
 
 	print("\n* Geometry Stats *")
-	print("Overall span: ", math.round(l, sigfigs), "mm.")
-	print("Change in x:  ", math.roung(dx, sigfigs), "mm")
-	print("Change in y:  ", math.round(dy, sigfigs), "mm")
-	print("Incline angle:", math.round(angle, sigfigs), "degrees. (Note that this is not absolute.)")
-	print("Length of compression members:", math.round(data[3], sigfigs), "mm")
-	print("Length of tension members:    ", math.round(data[4], sigfigs), "mm")
+	print("Overall span:  ", round(l, sigfigs), "mm.")
+	print("Change in x:   ", round(dx, sigfigs), "mm")
+	print("Change in y:   ", round(dy, sigfigs), "mm")
+	print("Incline angle: ", round(angle, sigfigs), "degrees. (Note that this is not absolute.)")
+	print("Enclosed angle:", round(data[1] * 2, sigfigs), "degrees")
+	print("Length of compression members:", round(data[4], sigfigs), "mm")
+	print("Length of tension members:    ", round(data[5], sigfigs), "mm")
 
 	print("\n* Capacity Stats *")
-	print("Maximum capacity by compression members:", math.round(data[1], sigfigs), "N")
-	print("Maximum capacity by tension members:    ", math.round(data[2], sigfigs), "N")
+	print("Maximum capacity by compression members:", round(data[2], sigfigs), "N")
+	print("Maximum capacity by tension members:    ", round(data[3], sigfigs), "N")
 
 
 	print("\nDone.")
