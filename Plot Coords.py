@@ -4,10 +4,6 @@
 
 # also includes functionality to scale the output dimensions
 
-############################
-#  VERY BUGGY, DO NOT USE  #
-############################
-
 import math
 
 # environment parameters #
@@ -71,10 +67,6 @@ def evaluateSubtruss(length, triangles, precision):
 	]
 
 
-# test code #
-triangles = [2, 4, 6, 8]	# possible numbers of triangles
-							# trusses to test
-
 l = 0
 
 p1 = [float(input(    "Enter start x coordinate:  ")), float(input("Enter start y coordinate: "))]
@@ -88,25 +80,6 @@ dy = p2[1] - p1[1]
 l = math.sqrt( dx**2 + dy**2 )
 data = evaluateSubtruss(l, triangles, 3)
 
-print("\nSubtruss measures ", l, "mm.")
-
-# calculate x and y steps per joint
-joint_dx = dx / triangles
-joint_dy = dy / triangles
-
-# find the joints along the centreline
-for i in range(0, triangles + 1):
-
-	# get and print the coordinates of the relevant centre point
-	cp = [(joint_dx * i), (joint_dy * i)]
-
-	# check whether there are additional points
-	#if i % 2 == 1:
-
-	print("Coordinates: (", cp[0] / reduction, ",", cp[1] / reduction, ")")
-	
-	
-
 if data[0]:
 	# successful run
 	print("Success. Placeholder line.")
@@ -115,11 +88,48 @@ else:
 	# unsuccessful run
 	print("ERROR: This subtruss is invalid. You've screwed something up. Terribly sorry.")
 
-angle = math.degrees(math.atan(dy/dx))
+print("\nSubtruss measures ", l, "mm.")
+
+# calculate x and y steps per joint
+joint_dx = dx / triangles
+joint_dy = dy / triangles
+
+# calculate the incline
+angle = 90
+if dx != 0:
+	# cannot divide by zero, but otherwise…
+	angle = math.degrees(math.atan(dy/dx))
+
+a = math.radians(angle)
+
+# find the joints along the centreline
+for i in range(0, triangles + 1):
+
+	# get the coordinates of the relevant centre point
+	cp = [(joint_dx * i), (joint_dy * i)]
+
+	print("Centre point: (", cp[0] / reduction, ",", cp[1] / reduction, ")")
+
+	# check whether there are additional joints
+	if i % 2 == 1:
+		# there are
+
+		# calc half of the tension member's length
+		l = data[5] / 2
+
+		# calculate the aditional joint locations
+		up = [(-1 * l * math.sin(a)), (l * math.cos(a))]
+		lp = [(l * math.sin(a)), (-1 * l * math.cos(a))]
+
+		# print the coordinates
+		print("Upper point:  (", up[0] / reduction, ",", up[1] / reduction, ")")
+		print("Lower point:  (", lp[0] / reduction, ",", lp[1] / reduction, ")")
+	
+
 
 print("\n* Additional Stats *")
-print("Length in x:  ", dx)
-print("Length in y:  ", dy)
+print("Change in x:  ", dx)
+print("Change in y:  ", dy)
 print("Incline angle:", angle, "degrees. (Note that this is not absolute.)")
 
 print("\nEnd.")
