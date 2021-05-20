@@ -11,6 +11,13 @@ kComp = (200) * ((60) ** 2)				# compression constant
 kTens = 230								# tension constant
 phi = 0.8								# reduction factor
 
+nVal = 0
+def n():
+	# get a serial number (for a joint)
+	global nVal
+	nVal += 1
+	return nVal
+
 # evaluate a given subtruss #
 def evaluateSubtruss(length, triangles, precision):
 
@@ -100,7 +107,7 @@ if data[0]:
 
 	a = math.radians(angle)
 
-	print("* Joint Coordinates *")
+	print("\n* Joint Coordinates *")
 
 	# find the joints along the centreline
 	for i in range(0, triangles + 1):
@@ -108,7 +115,7 @@ if data[0]:
 		# get the coordinates of the relevant centre point
 		cp = [(joint_dx * i), (joint_dy * i)]
 
-		print("Centre point - (", round(cp[0] / reduction, 1), ",", round(cp[1] / reduction, 1), ")")
+		print(f'{n():02d}', "Centre point - (", round(cp[0] / reduction, 1), ",", round(cp[1] / reduction, 1), ")")
 
 		# check whether there are additional joints
 		if i % 2 == 1:
@@ -122,8 +129,8 @@ if data[0]:
 			lp = [(l * math.sin(a)), (-1 * l * math.cos(a))]
 
 			# print the coordinates
-			print("Upper point  ^ (", round(up[0] / reduction, 1), ",", round(up[1] / reduction, 1), ")")
-			print("Lower point  v (", round(lp[0] / reduction, 1), ",", round(lp[1] / reduction, 1), ")")
+			print(f'{n():02d}', "Upper point  ^ (", round(up[0] / reduction, 1), ",", round(up[1] / reduction, 1), ")")
+			print(f'{n():02d}', "Lower point  v (", round(lp[0] / reduction, 1), ",", round(lp[1] / reduction, 1), ")")
 		
 
 
