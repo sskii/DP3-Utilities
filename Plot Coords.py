@@ -125,8 +125,8 @@ if data[0]:
 			l = data[5] / 2
 
 			# calculate the aditional joint locations
-			up = [(-1 * l * math.sin(a)), (l * math.cos(a))]
-			lp = [(l * math.sin(a)), (-1 * l * math.cos(a))]
+			up = [(-1 * l * math.sin(a)) + cp[0], (l * math.cos(a)) + cp[1]]
+			lp = [(l * math.sin(a)) + cp[0], (-1 * l * math.cos(a)) + cp[1]]
 
 			# print the coordinates
 			print(f'{n():02d}', "Upper point  ^ (", round(up[0] / reduction, 1), ",", round(up[1] / reduction, 1), ")")
