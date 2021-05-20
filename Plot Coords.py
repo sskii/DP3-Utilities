@@ -82,6 +82,7 @@ dx = p2[0] - p1[0]
 dy = p2[1] - p1[1]
 
 l = math.sqrt( dx**2 + dy**2 )
+	print("\nDesign is valid. Evaluation:\n")
 data = evaluateSubtruss(l, triangles, sigfigs)
 
 if data[0]:
